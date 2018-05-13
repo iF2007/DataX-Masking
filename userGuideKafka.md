@@ -257,15 +257,15 @@ python datax.py jobkafkatomysql.json
 
 使用命令行发送数据到kafka
 
-![52620944683](D:\wh\DataMasking\DataX-Masking\DataX-Masking\img\cmdData.png)
+![52620944683](img/cmdData.png)
 
 datax控制台输入exit退出监听
 
-![52620961933](D:\wh\DataMasking\DataX-Masking\DataX-Masking\img\cmddatax.png)
+![52620961933](img/cmddatax.png)
 
 数据写入mysql
 
-![52620948844](D:\wh\DataMasking\DataX-Masking\DataX-Masking\img\cmdmysqldata.png)
+![52620948844](img/cmdmysqldata.png)
 
 ##### 2  从mysql中读取数据，写入kafka
 
@@ -275,11 +275,11 @@ python datax.py jobmysqltokafka.json
 
 mysql中原数据
 
-![52620885608](img\mysqldata1.png)
+![52620885608](img/mysqldata1.png)
 
 写入kafka的数据
 
-![52620894640](D:\wh\DataMasking\DataX-Masking\DataX-Masking\img\kafkadata1.png)
+![52620894640](img/kafkadata1.png)
 
 ##### 3   从kafka中读取数据，写入kafka另外一个topic
 
@@ -291,11 +291,11 @@ python datax.py jobkafka.json
 
 向testdata中发送数据
 
-![52621003576](D:\wh\DataMasking\DataX-Masking\DataX-Masking\img\cmdData2.png)
+![52621003576](img/cmdData2.png)
 
 从testdata2中接收数据
 
-![52621006932](D:\wh\DataMasking\DataX-Masking\DataX-Masking\img\kafkadata2.png)
+![52621006932](img/kafkadata2.png)
 
 # 遗留问题
 
