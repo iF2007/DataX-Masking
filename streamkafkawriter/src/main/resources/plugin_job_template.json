@@ -1,0 +1,7 @@
+{
+    "name": "streamkafkawriter",
+    "parameter": {
+        "encoding": "",
+        "print": true
+    }
+}

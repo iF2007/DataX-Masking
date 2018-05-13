@@ -1,0 +1,7 @@
+{
+    "name": "streamkafkareader",
+    "parameter": {
+        "sliceRecordCount": "",
+        "column": []
+    }
+}
