@@ -46,12 +46,12 @@
 ## 脱敏方法数据类型支持情况
 | DataX 内部类型|  Floor    | Hiding | Enumerate|Prefix-Preserve|MD5|EDP|RSA|AES|FPE|
 | -------- | :-:  | :-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Long     |√|√| √|√||√|||
-| Double   |√|√||||√|||
+| Long     |√|√| √|√||√||||
+| Double   |√|√||||√||||
 | String   |   |√||√|√||√|√|√|
-| Date     |√|√||||||
-| Boolean  |    |√||||||
-| Bytes    |     |||||||
+| Date     |√|√||||||||
+| Boolean  |    |√||||||||
+| Bytes    |     |||||||||
 | 可逆 |||||||:coffee:||:construction:|
 |UTF-8编码下多语言支持||√|||√|:construction:||:construction:|
 
