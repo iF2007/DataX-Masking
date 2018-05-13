@@ -52,10 +52,10 @@
 | Date     |√|√||||||||
 | Boolean  |    |√||||||||
 | Bytes    |     |||||||||
-| 可逆 |||||||:coffee:||:construction:|
-|UTF-8编码下多语言支持||√|||√|:construction:||:construction:|
+| 可逆 |||||||DEBUG||building|
+|UTF-8编码下多语言支持||building|
 
-当前版本RSA解密尚不稳定。
+注：当前版本RSA解密尚不稳定。
 
 ## Masking Transformer 配置编写介绍
 * columnIndex：columnIndex
@@ -213,17 +213,6 @@ Transformer配置示例：
 
 表示对第2列（下标从0开始）数据字段采用私钥解密的数据转换方法。
 ```
-## 当前版本 0.1 Alpha
-
-### Notice!
-* 当前版本仅在开发环境下进行过测试
-* 当前版本RSA解密仍不稳定，建议暂勿使用
-* 当前版本每次仅可使用一种密码学方法
-
-### Future
-* 稳定的RSA加密解密
-* 提供可对中文字符进行加密的保型加密
-* 提供动态加载自定义transformer的功能
 
 ## 附录
 
