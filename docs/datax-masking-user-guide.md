@@ -55,7 +55,7 @@
 | 可逆 |||||||DEBUG||building|
 |UTF-8编码下多语言支持||building|
 
-注：当前版本RSA解密尚不稳定。
+注：当前版本RSA解密尚不稳定，已暂时删去。
 
 ## Masking Transformer 配置编写介绍
 * columnIndex：columnIndex
@@ -193,26 +193,8 @@ paras:有效参数1个，第二个参数置空
 }
 ```
 
-6.3 RSA加密/解密
+~~6.3 RSA加密/解密~~
 
-paras 第二个参数：*private_encrypt* 私钥加密；*private_decrypt* 私钥解密；*public_encrypt* 公钥加密；*public_decrypt* 公钥解密
-
-```
-RSA私钥解密
-paras 有效参数2个，第二个参数指明具体使用的方法。
-Transformer配置示例：
-
-{
-    "name": "dx_cryp",
-    "parameter": 
-        {
-        "columnIndex":2,
-        "paras":["RSA", "private_decrypt"]
-        }  
-}
-
-表示对第2列（下标从0开始）数据字段采用私钥解密的数据转换方法。
-```
 
 ## 附录
 

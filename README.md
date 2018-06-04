@@ -26,7 +26,6 @@ DataX-Masking 通过扩展DataX的transformer中间件，集成了多种脱敏�
 |EDP|Epsilon Differential Privacy | 17.5 -> 17.962 |
 |AES|AES-128-CBC 对称加密|你好世界！-> 12da3fedd5f0992447b1c7b4af0d7133|
 | FPE | format Preserving Encryption | abcdefg -> iskejtl |
-| RSA | RSA 非对称密钥加密算法 | 加密：明文->长度为256字串(1024位二进制整数的16进制表示法)<br>解密：加密后的字串->明文 | 
 
 
 ## Support Data Channels 
@@ -71,11 +70,12 @@ DataX目前已经有了比较全面的插件体系，主流的RDBMS数据库、N
 
 ### Notice!
 * 当前版本仅在开发环境下进行过测试
-* 当前版本RSA解密仍不稳定，建议暂勿使用
+* 当前版本RSA解密仍不稳定，已在主版本中删除
 * 当前版本每次仅可使用一种密码学方法
 
 ### Future
 * 稳定的RSA加密解密
+* 性能优化
 * 提供可对中文字符进行加密的保型加密
 * 提供动态加载自定义transformer的功能
 

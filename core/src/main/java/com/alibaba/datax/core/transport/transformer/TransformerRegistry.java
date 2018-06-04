@@ -42,7 +42,7 @@ public class TransformerRegistry {
         registTransformer(new EnumerateTransformer());
         registTransformer(new FloorTransformer());
         registTransformer(new HidingTransformer());
-        registTransformer(new MaskTransformer());
+        registTransformer(new MaskTransformer());   //加密方法
         registTransformer(new MD5Transformer());
         registTransformer(new PrefixPreserveTransformer());
     }

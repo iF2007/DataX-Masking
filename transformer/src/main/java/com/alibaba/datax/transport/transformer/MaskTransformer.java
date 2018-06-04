@@ -57,23 +57,6 @@ public class MaskTransformer extends  Transformer{
                 String newValue = masker.execute(oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }
-            else if(maskMethodId.equals("RSA")){
-                RSAEncryptionImpl masker = new RSAEncryptionImpl();
-                String newValue = "";
-                if (key.equals("private_decrypt")){
-                    newValue = masker.executeWithPrivateDecrypt(oriValue, masker.PKCS1);
-                }
-                else if(key.equals("private_encrypt")){
-                    newValue = masker.executeWithPrivateEncrypt(oriValue, masker.PKCS1);
-                }
-                else if(key.equals("public_decrypt")){
-                    newValue = masker.executeWithPublicDecrypt(oriValue, masker.PKCS1);
-                }
-                else if(key.equals("public_encrypt")){
-                    newValue = masker.executeWithPublicEncrypt(oriValue, masker.PKCS1);
-                }
-                record.setColumn(columnIndex, new StringColumn(newValue));
-            }
         } catch (Exception e) {
             throw DataXException.asDataXException(TransformerErrorCode.TRANSFORMER_RUN_EXCEPTION, e.getMessage(),e);
         }
