@@ -1,5 +1,16 @@
 package com.alibaba.datax.transport.transformer.maskingMethods.cryptology;
 
+import java.io.*;
+import java.security.*;
+import java.security.interfaces.*;
+import java.math.*;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.bouncycastle.crypto.AsymmetricBlockCipher;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 import org.bouncycastle.crypto.encodings.PKCS1Encoding;
@@ -9,36 +20,15 @@ import org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import org.bouncycastle.util.encoders.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.interfaces.RSAPrivateCrtKey;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.ArrayList;
-import java.util.List;
 import com.alibaba.datax.transport.transformer.maskingConfigure.RSAKey;
+
+
+import javax.crypto.Cipher;
 
 /**
  * @author liujiaye
  * RSA
  */
-
-/*
-* @author Liu Kun
-* 实现了私钥加密和公钥解密操作  2018-04-24
-*
-*
-* RSA加密解密
-数据加密前：asdjl12
-将原始数据转换为16进制表示的字串：6173646a6c3132
-私钥加密后：19bb286a60ce386fcc43099754fd966a976025ce55688570fabbae293ed47940b71373f0dd715e5797348f198139404a24534b72bfedf261a49094d63babba63a29391758dd1273f8d0076dc91e86f23161be5ea2ccf63cec1286e8c056ce9d4dd65c273e55967eb81a44e3fc54b977342289ba9a1cf3f257a583c3f240d52b9
-解密后：asdjl12
-* */
 
 public class RSAEncryptionImpl extends CryptologyMasking{
 	// 填充模式
@@ -50,17 +40,10 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 	private KeyPair pair;
 	private int keyLength = 1024;
 
-    private static Logger logger = LoggerFactory.getLogger(RSAEncryptionImpl.class);
+	public int pairIsChanged = 0;//多次操作的计数器（预留）
 
-	/**
-	 * constructor
-	 * parameter keyLength
-	 */
-	public RSAEncryptionImpl(int keyLength) {
-		// generate RSA Key Pair
-		this.keyLength = keyLength;
-		generateRSAKeyPair();
-	}
+	private static Logger logger = LoggerFactory.getLogger(RSAEncryptionImpl.class);
+
 
 	/**
 	 * constructor
@@ -70,6 +53,9 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 		// generate RSA Key Pair
 		generateRSAKeyPair();
 	}
+
+	//生成密钥、公钥加密私钥解密新方法，包括String与byte转换问题解决；明文、密文过长问题
+	//String底层是以Char数组记录的，Byte会转化成Char，因为Char和Byte的长度不同，所以在转化的过程中会对Byte进行整合，主要是用0填充。将字节转化为两位BCD码
 
 	private void generateRSAKeyPair() {
 		try {
@@ -81,23 +67,226 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 	}
 
 	public void printRSAKeyPair(){
-        try {
-            KeyPairGenerator rsaKeyGen = KeyPairGenerator.getInstance("RSA");
-            // setKeyLength 1024,setCertaintyOfPrime
-            rsaKeyGen.initialize(keyLength, new SecureRandom());
-            KeyPair Pair = rsaKeyGen.genKeyPair();
-            System.out.println((RSAPublicKey) Pair.getPublic());
-            RSAPrivateKey priKey = (RSAPrivateKey) Pair.getPrivate();
-            RSAPublicKey pubKey = (RSAPublicKey) Pair.getPublic();
-        } catch (Exception e) {
-            System.out.println("Exception in keypair generation. Reason: " + e);
-        }
-    }
+		try {
+			KeyPairGenerator rsaKeyGen = KeyPairGenerator.getInstance("RSA");
+			// setKeyLength 1024,setCertaintyOfPrime
+			rsaKeyGen.initialize(keyLength, new SecureRandom());
+			KeyPair Pair = rsaKeyGen.genKeyPair();
+			System.out.println((RSAPublicKey) Pair.getPublic());
+			RSAPrivateKey priKey = (RSAPrivateKey) Pair.getPrivate();
+			RSAPublicKey pubKey = (RSAPublicKey) Pair.getPublic();
+		} catch (Exception e) {
+			System.out.println("Exception in keypair generation. Reason: " + e);
+		}
+	}
+
 
 	/**
 	 * 使用公钥加密
-	 * @clearBytes
-	 * @type: padding type
+	 * @return
+	 */
+	public String publicEncrypt(RSAPublicKey pk,String data) {
+		try {
+			Cipher cipher = Cipher.getInstance("RSA");
+			cipher.init(Cipher.ENCRYPT_MODE, pk);
+			//模长
+			int key_len = pk.getModulus().bitLength() / 8;
+			//加密数据长度<=模长-11
+			String[] datas = splitString(data, key_len - 11);
+			String result = "";
+			//如果明文长度大于模长-11则要分组加密
+			for (String s : datas) {
+				result += bcd2Str(cipher.doFinal(s.getBytes()));
+			}
+			return result;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 公钥解密
+	 * @param pk
+	 * @param data
+	 * @return 解密后的明文
+	 */
+	public String publicDecrypt(RSAPublicKey pk,String data) {
+		try {
+			Cipher cipher = Cipher.getInstance("RSA");
+			cipher.init(Cipher.DECRYPT_MODE, pk);
+			//模长
+			int key_len = pk.getModulus().bitLength() / 8;
+			//加密数据长度<=模长-11
+			String[] datas = splitString(data, key_len - 11);
+			String result = "";
+			//如果明文长度大于模长-11则要分组加密
+			for (String s : datas) {
+				result += bcd2Str(cipher.doFinal(s.getBytes()));
+			}
+			return result;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 私钥解密
+	 * @param pk
+	 * @param data
+	 * @return
+	 */
+	/**
+	 * 私钥解密
+	 * @param pk
+	 * @param data
+	 * @return
+	 */
+	public String privateDecrypt(RSAPrivateKey pk,String data){
+		try{
+			Cipher cipher=Cipher.getInstance("RSA");
+			cipher.init(Cipher.DECRYPT_MODE, pk);
+			//模长
+			int key_len=pk.getModulus().bitLength()/8;
+			byte[] bytes=data.getBytes();
+			byte[] bcd=ASCII_To_BCD(bytes,bytes.length);
+			System.err.println(bcd.length);
+			//如果密文长度大于模长则要分组解密
+			String result="";
+			byte[][] arrays=splitArray(bcd,key_len);
+			for(byte[] arr:arrays){
+				result+=new String(cipher.doFinal(arr));
+			}
+			return result;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 私钥加密
+	 * @param pk
+	 * @param data
+	 * @return
+	 */
+	public String privateEncrypt(RSAPrivateKey pk,String data) {
+		try {
+			Cipher cipher = Cipher.getInstance("RSA");
+			cipher.init(Cipher.ENCRYPT_MODE, pk);
+			//模长
+			int key_len = pk.getModulus().bitLength() / 8;
+			//加密数据长度<=模长-11
+			String[] datas = splitString(data, key_len - 11);
+			String result = "";
+			//如果明文长度大于模长-11则要分组加密
+			for (String s : datas) {
+				result += bcd2Str(cipher.doFinal(s.getBytes()));
+			}
+			return result;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * BCD转字符串
+	 * @param bytes
+	 * @return
+	 */
+	public static String bcd2Str(byte[] bytes){
+		char temp[]=new char[bytes.length*2];
+		char val;
+		for(int i=0;i<bytes.length;i++){
+			//0xf0:1111 1000  ;0x0f:1111 0000
+			val=(char)(((bytes[i]&0xf0)>>4)&0x0f);
+			temp[i*2]=(char)(val>9?val+'A'-10:val+'0');
+			val=(char)(bytes[i]&0x0f);
+			temp[i*2+1]=(char)(val>9?val+'A'-10:val+'0');
+
+		}
+		return new String(temp);
+	}
+
+	/**
+	 * 拆分字符
+	 * @param content
+	 * @param len
+	 * @return
+	 */
+	private static String[] splitString(String content,int len){
+		int x=content.length()/len;
+		int y=content.length()%len;
+		int z=0;
+		if(y!=0)
+			z=1;
+		String[] strs=new String[x+z];
+		String str="";
+		for(int i=0;i<x+z;i++){
+			if(i==x+z-1&&y!=0)
+				str=content.substring(i*len,i*len+y);
+			else
+				str=content.substring(i*len,(i+1)*len);
+			strs[i]=str;
+		}
+		return strs;
+	}
+
+	private static byte[] ASCII_To_BCD(byte[] ascii,int asc_len){
+		byte[]bcd=new byte[asc_len/2];
+		int j=0;
+		for(int i=0;i<(asc_len+1)/2;i++){
+			bcd[i]=asc_to_bcd(ascii[j++]);
+			bcd[i]=(byte)(((j>=asc_len)?0x00:asc_to_bcd(ascii[j++]))+(bcd[i]<<4));
+		}
+		return bcd;
+	}
+	private static byte asc_to_bcd(byte asc){
+		byte bcd;
+		if ((asc >= '0') && (asc <= '9'))
+			bcd = (byte) (asc - '0');
+		else if ((asc >= 'A') && (asc <= 'F'))
+			bcd = (byte) (asc - 'A' + 10);
+		else if ((asc >= 'a') && (asc <= 'f'))
+			bcd = (byte) (asc - 'a' + 10);
+		else
+			bcd = (byte) (asc - 48);
+		return bcd;
+	}
+
+	/**
+	 * 拆分数组
+	 * @param data
+	 * @param len
+	 * @return
+	 */
+	public static byte[][] splitArray(byte[] data, int len) {
+		int x = data.length / len;
+		int y = data.length % len;
+		int z = 0;
+		if (y != 0) {
+			z = 1;
+		}
+		byte[][] arrays = new byte[x + z][];
+		byte[] arr;
+		for (int i = 0; i < x + z; i++) {
+			arr = new byte[len];
+			if (i == x + z - 1 && y != 0) {
+				System.arraycopy(data, i * len, arr, 0, y);
+			} else {
+				System.arraycopy(data, i * len, arr, 0, len);
+			}
+			arrays[i] = arr;
+		}
+		return arrays;
+	}
+	//旧版本
+	/**
+	 * 使用公钥加密
+	 * @param clearBytes
+	 * @param type
 	 * @return
 	 */
 	public byte[] publicEncrypt(byte[] clearBytes, int type) {
@@ -146,7 +335,7 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 	}
 
 	/**
-	 * 使用私钥加密
+	 * 使用私钥解密
 	 * @param encodedBytes
 	 * @param type
 	 * @return
@@ -180,7 +369,7 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 	}
 
 	/**
-	 * 使用私钥解密
+	 * 使用私钥加密
 	 * @param encodedBytes
 	 * @param type
 	 * @return
@@ -210,6 +399,46 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 		return null;
 	}
 
+
+	/**
+	 * 使用私钥解密，从用户获取私钥
+	 * @param encodedBytes
+	 * @param type
+	 * @return
+	 */
+	public byte[] privateEncrypt(RSAPrivateKey pk,byte[] encodedBytes, int type) {
+		RSAPrivateCrtKey prvCrtKey = (RSAPrivateCrtKey)pk;
+		BigInteger mod = prvCrtKey.getModulus();
+		BigInteger pubExp = prvCrtKey.getPublicExponent();
+		BigInteger privExp = prvCrtKey.getPrivateExponent();
+		BigInteger pExp = prvCrtKey.getPrimeExponentP();
+		BigInteger qExp = prvCrtKey.getPrimeExponentQ();
+		BigInteger p = prvCrtKey.getPrimeP();
+		BigInteger q = prvCrtKey.getPrimeQ();
+		BigInteger crtCoef = prvCrtKey.getCrtCoefficient();
+		RSAKeyParameters para = new RSAPrivateCrtKeyParameters(mod, pubExp, privExp, p, q, pExp, qExp, crtCoef);
+		AsymmetricBlockCipher engine = new RSAEngine();
+		if (type == PKCS1)
+			engine = new PKCS1Encoding(engine);
+		engine.init(true, para);
+		try {
+			byte[] data = engine.processBlock(encodedBytes, 0, encodedBytes.length);
+			return data;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("privateEncrypt engine.processBlock error");
+		}
+		return null;
+	}
+
+	public RSAPublicKey getPublicKey() {
+		return publicKey;
+	}
+
+	public RSAPrivateKey getPrivateKey() {
+		return privateKey;
+	}
+
 	public String changeBytesToString(byte[] data) {
 		return new String(Hex.encode(data));
 	}
@@ -219,47 +448,19 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 		return -1;
 	}
 
-	public String execute(String originData, int type) throws NoSuchAlgorithmException {
-        byte[] cipher = publicEncrypt(originData.getBytes(), type);
-        return changeBytesToString(cipher);
-    }
+	public String execute(String originData) throws Exception {
 
-    public List<String> execute(List<String> originData) throws Exception {
-        List<String> cipherData = new ArrayList<String>();
-        for (String str : originData) {
-            String cipherStr = changeBytesToString(publicEncrypt(str.getBytes(),1));
-            cipherData.add(cipherStr);
-        }
-        return cipherData;
-    }
-
-
-	public String executeWithPublicDecrypt(String originData, int type) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		BigInteger origin = new BigInteger(originData, 16);
-		byte[] cipher = publicDecrypt(origin.toByteArray(), type);
-		String decoded = changeBytesToString(cipher);
-		BigInteger raw_code = new BigInteger(decoded,16);
-		String result = new String(raw_code.toByteArray(), "ascii");
-		return result;
-	}
-
-	public String executeWithPublicEncrypt(String originData, int type) throws NoSuchAlgorithmException {
-		byte[] cipher = publicEncrypt(originData.getBytes(), type);
+		byte[] cipher=publicEncrypt(originData.getBytes(), 1);
 		return changeBytesToString(cipher);
 	}
 
-	public String executeWithPrivateDecrypt(String originData, int type) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		BigInteger origin = new BigInteger(originData, 16);
-		byte[] cipher = privateDecrypt(origin.toByteArray(), type);
-		String decoded = changeBytesToString(cipher);
-		BigInteger raw_code = new BigInteger(decoded,16);
-		String result = new String(raw_code.toByteArray(), "ascii");
-		return result;
-	}
-
-	public String executeWithPrivateEncrypt(String originData, int type) throws NoSuchAlgorithmException {
-		byte[] cipher = privateEncrypt(originData.getBytes(), type);
-		return changeBytesToString(cipher);
+	public List<String> execute(List<String> originData) throws Exception {
+		List<String> cipherData = new ArrayList<String>();
+		for (String str : originData) {
+			String cipherStr = changeBytesToString(publicEncrypt(str.getBytes(),1));
+			cipherData.add(cipherStr);
+		}
+		return cipherData;
 	}
 
 	//override from Masking
@@ -296,52 +497,26 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 			e.printStackTrace();
 		}
 		return null;
-	}
-*/
+	}*/
+
 	public static void main(String[] args){
-		RSAEncryptionImpl masker = new RSAEncryptionImpl();
-		for(int i=0;i<10;i++){
-			try{
-//				String content = new String("C");
-//				RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
-//				String result = rsatest.execute(content, 2);
-//				System.out.println(result);
-//				int PaddingType = rsatest.RAW;
-//				System.out.println("RSA加密解密\n数据加密前：" + content);
-//				System.out.println("将原始数据转换为16进制表示的字串：" + rsatest.changeBytesToString(content.getBytes()));
-//				String masked = rsatest.executeWithPrivateEncrypt(content, PaddingType);
-//				System.out.println("私钥加密后：" + masked);
-//				String decoded = rsatest.executeWithPublicDecrypt(masked, PaddingType);
-//				System.out.println("解密后：" + decoded);
-//				masked = rsatest.executeWithPublicEncrypt(content, PaddingType);
-//				System.out.println("公钥加密后：" + masked);
-//				decoded = rsatest.executeWithPrivateDecrypt(masked, PaddingType);
-//				System.out.println("私钥解密后：" + decoded);
-			}
-			catch (Exception e){
-				System.out.println(e);
+		try {
+			BufferedReader inputFile = new BufferedReader(new FileReader("E:\\LiuKun\\Project2018\\语料库\\中文语料库\\停用词表\\stopword.dic.txt"));
+			String plainText = new String();
+			String temp = inputFile.readLine();
+			while (null != temp) {
+				temp = inputFile.readLine();
+				String content = new String("你好小姐姐"+temp);
+				RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
+				System.out.println("String加密前：" + content);
+				rsatest.generateRSAKeyPair();
+				String result = rsatest.publicEncrypt(rsatest.publicKey, content);
+				System.out.println("加密后:\n" + result);
+				System.out.println("解密后: "+rsatest.privateDecrypt(rsatest.privateKey, result));
 			}
 		}
-//		RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
-//		try{
-//			String example = "ZU";
-//			String encrypt = rsatest.executeWithPublicEncrypt(example, 1);
-//			System.out.println(encrypt);
-//			String result = rsatest.executeWithPrivateDecrypt(encrypt, 1);
-//			System.out.println(result);
-//		}catch (Exception e){
-//			System.out.println(e);
-//		}
-		for(int i=0;i<10;i++){
-			//ASCII字符长度不能超过117，原因不得而知。
-			String content = new String("BKG2I");
-			RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
-			System.out.println("String加密前："+ content);
-			System.out.println("字符串："+ rsatest.changeBytesToString(content.getBytes()));
-			byte[] cipher=rsatest.publicEncrypt(content.getBytes(), RAW);
-			System.out.println("公钥加密后："+ rsatest.changeBytesToString(cipher));
-			byte[] plain=rsatest.privateDecrypt(cipher, RAW);
-			System.out.println("解密后："+ new String(plain));
+		catch (IOException e){
+			e.printStackTrace();
 		}
 	}
 }

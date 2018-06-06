@@ -3,7 +3,7 @@ package com.alibaba.datax.transport.transformer;
 import com.alibaba.datax.common.element.*;
 import com.alibaba.datax.common.exception.DataXException;
 import com.alibaba.datax.transport.transformer.maskingMethods.anonymity.*;
-import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AESEncryptionImpl;
+import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AES;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.FormatPreservingEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.RSAEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.differentialPrivacy.EpsilonDifferentialPrivacyImpl;
@@ -46,10 +46,16 @@ public class MaskTransformer extends  Transformer{
             if(oriValue == null){
                 return  record;
             }
-            if(maskMethodId.equals("AES")){
+            if(maskMethodId.equals("AES_E")){
                 String newValue;
-                AESEncryptionImpl masker = new AESEncryptionImpl();
-                newValue = masker.execute(oriValue);
+                AES masker = AES.getInstance(key);
+                newValue = masker.encode(oriValue);
+                record.setColumn(columnIndex, new StringColumn(newValue));
+            }
+            else if(maskMethodId.equals("AES_D")){
+                String newValue;
+                AES masker = AES.getInstance(key);
+                newValue = masker.decode(oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }
             else if(maskMethodId.equals("FPE")){
@@ -61,16 +67,16 @@ public class MaskTransformer extends  Transformer{
                 RSAEncryptionImpl masker = new RSAEncryptionImpl();
                 String newValue = "";
                 if (key.equals("private_decrypt")){
-                    newValue = masker.executeWithPrivateDecrypt(oriValue, masker.PKCS1);
+                    newValue = masker.privateDecrypt(masker.getPrivateKey(), oriValue);
                 }
                 else if(key.equals("private_encrypt")){
-                    newValue = masker.executeWithPrivateEncrypt(oriValue, masker.PKCS1);
+                    newValue = masker.privateEncrypt(masker.getPrivateKey(), oriValue);
                 }
                 else if(key.equals("public_decrypt")){
-                    newValue = masker.executeWithPublicDecrypt(oriValue, masker.PKCS1);
+                    newValue = masker.publicDecrypt(masker.getPublicKey(), oriValue);
                 }
                 else if(key.equals("public_encrypt")){
-                    newValue = masker.executeWithPublicEncrypt(oriValue, masker.PKCS1);
+                    newValue = masker.publicEncrypt(masker.getPublicKey(), oriValue);
                 }
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }

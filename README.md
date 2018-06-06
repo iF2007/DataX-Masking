@@ -67,7 +67,7 @@ DataX目前已经有了比较全面的插件体系，主流的RDBMS数据库、N
 ## 我要开发新的插件
 请点击：[DataX transformer插件开发](https://blog.csdn.net/landstream/article/details/79933800)
 
-## 当前版本 0.2 Alpha
+## 当前版本 0.3 Beta
 
 ### Notice!
 * 当前版本仅在开发环境下进行过测试
