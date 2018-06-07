@@ -2,15 +2,11 @@ package com.alibaba.datax.transport.transformer;
 
 import com.alibaba.datax.common.element.*;
 import com.alibaba.datax.common.exception.DataXException;
-import com.alibaba.datax.transport.transformer.maskingMethods.anonymity.*;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AES;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.FormatPreservingEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.RSAEncryptionImpl;
-import com.alibaba.datax.transport.transformer.maskingMethods.differentialPrivacy.EpsilonDifferentialPrivacyImpl;
-import com.alibaba.datax.transport.transformer.maskingMethods.irreversibleInterference.MD5EncryptionImpl;
 
 import java.util.Arrays;
-import java.util.Date;
 
 /**
  * Mask data to protect privacy.
@@ -63,22 +59,21 @@ public class MaskTransformer extends  Transformer{
                 String newValue = masker.execute(oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }
-            else if(maskMethodId.equals("RSA")){
+            else if(maskMethodId.equals("RSA_PubE")){
                 RSAEncryptionImpl masker = new RSAEncryptionImpl();
                 String newValue = "";
-                if (key.equals("private_decrypt")){
-                    newValue = masker.privateDecrypt(masker.getPrivateKey(), oriValue);
-                }
-                else if(key.equals("private_encrypt")){
-                    newValue = masker.privateEncrypt(masker.getPrivateKey(), oriValue);
-                }
-                else if(key.equals("public_decrypt")){
-                    newValue = masker.publicDecrypt(masker.getPublicKey(), oriValue);
-                }
-                else if(key.equals("public_encrypt")){
-                    newValue = masker.publicEncrypt(masker.getPublicKey(), oriValue);
-                }
+                newValue = masker.publicEncrypt(masker.getPublicKey(), oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
+            }
+            else if(maskMethodId.equals("RSA_PriD")){
+                RSAEncryptionImpl masker = new RSAEncryptionImpl();
+                String newValue = "";
+                newValue = masker.privateDecrypt(masker.getPrivateKey(), oriValue);
+                record.setColumn(columnIndex, new StringColumn(newValue));
+            }
+            else{
+                System.out.println("未找到相应transformer:" + maskMethodId);
+                return record;
             }
         } catch (Exception e) {
             throw DataXException.asDataXException(TransformerErrorCode.TRANSFORMER_RUN_EXCEPTION, e.getMessage(),e);

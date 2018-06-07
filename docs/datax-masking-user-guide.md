@@ -205,11 +205,12 @@ paras:有效参数1个，第二个参数置空
 6.3 RSA加密/解密
 目前支持公钥加密和私钥解密两种方法
 
-paras 第二个参数：*private_decrypt* 私钥解密；*public_encrypt* 公钥加密；
+paras 第二个参数：*RSA_PriD* 私钥解密；
+*RSA_PubE* 公钥加密；
 
 ```
 RSA私钥解密
-paras 有效参数2个，第二个参数指明具体使用的方法。
+paras 有效参数1个
 Transformer配置示例：
 
 {
@@ -217,10 +218,18 @@ Transformer配置示例：
     "parameter": 
         {
         "columnIndex":2,
-        "paras":["RSA", "private_decrypt"]
+        "paras":["RSA_PubE"]
         }  
 }
 
+{
+    "name": "dx_cryp",
+    "parameter": 
+        {
+        "columnIndex":2,
+        "paras":["RSA_PriD"]
+        }  
+}
 表示对第2列（下标从0开始）数据字段采用私钥解密的数据转换方法。
 ```
 
