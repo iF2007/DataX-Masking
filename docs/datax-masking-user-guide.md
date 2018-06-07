@@ -55,7 +55,9 @@
 | 可逆 |||||||DEBUG||building|
 |UTF-8编码下多语言支持||building|
 
-注：当前版本RSA解密尚不稳定，已暂时删去。
+
+注：RSA和AES对接数据库时，请确保加密字段支持UTF-8编码！！
+
 
 ## Masking Transformer 配置编写介绍
 * columnIndex：columnIndex
@@ -159,23 +161,32 @@ paras:0个，建议置空
 
 | 加密算法代号 | 加密算法 | 支持数据类型 | 参数说明 |
 | - | :-: | :-: | - |
-| AES | AES-128-CBC | String | 加密算法不需要额外参数 |
+| AES | AES-128-CBC | String | 需要提供生成秘钥的规则字符串 |
 | FPE | format Preserving Encryption | String | 不需要额外参数，**字符串中只能包含小写字母而不能有任何其他字符** |
 | RSA | RSA 非对称密钥加密算法 | String | 缺省情况下私钥和密钥由系统生成并以.pem形式存储在本地。参数：<br>*private_encrypt* 私钥加密；*private_decrypt* 私钥解密；*public_encrypt* 公钥加密；*public_decrypt* 公钥解密 |
 
 第一个参数指明需要采用的密码学算法（算法代号）。
 
 
-6.1 AES加密
+6.1 AES加密解密
 ```
-paras:有效为1个，第二个参数置空
-
+paras:有效参数2个，第一个是方法代号；第二个参数为字符串，用于生成秘钥，加密解密操作需保持一致。
+加密：
 {
     "name": "dx_cryp",
     "parameter": 
         {
         "columnIndex":1,
-        "paras":["AES", ""]
+        "paras":["AES_E", "{encodeRule}"]
+        }  
+}
+解密：
+{
+    "name": "dx_cryp",
+    "parameter": 
+        {
+        "columnIndex":1,
+        "paras":["AES_D", "{encodeRule}"]
         }  
 }
 ```
@@ -193,8 +204,36 @@ paras:有效参数1个，第二个参数置空
 }
 ```
 
-~~6.3 RSA加密/解密~~
+6.3 RSA加密/解密
+目前支持公钥加密和私钥解密两种方法
 
+paras 第二个参数：*RSA_PriD* 私钥解密；
+*RSA_PubE* 公钥加密；
+
+```
+RSA私钥解密
+paras 有效参数1个
+Transformer配置示例：
+
+{
+    "name": "dx_cryp",
+    "parameter": 
+        {
+        "columnIndex":2,
+        "paras":["RSA_PubE"]
+        }  
+}
+
+{
+    "name": "dx_cryp",
+    "parameter": 
+        {
+        "columnIndex":2,
+        "paras":["RSA_PriD"]
+        }  
+}
+表示对第2列（下标从0开始）数据字段采用私钥解密的数据转换方法。
+```
 
 ## 附录
 
@@ -321,15 +360,8 @@ paras:有效参数1个，第二个参数置空
 ```
 
 ### RSA加密解密操作补充说明
-支持全部四种加密解密操作：
-1. 公钥加密；
-2. 公钥解密；
-3. 私钥加密；
-4. 私钥解密。
 
 公钥加密后配合私钥解密可以实现针对特定对象的加密传输，可以用来交易数据。
-
-私钥加密后配合公钥解密可以实现签名功能，用以验证数据来源。
 
 **为了保证加密解密过程的有效性，这里在加密过程中取消了padding方法，这使得对于需要加密的明文，其对应的bite位长度应小于秘钥长度(1024）位，**
 点此查看[原因](http://arganzheng.life/input-too-large-for-RSA-cipher.html)。

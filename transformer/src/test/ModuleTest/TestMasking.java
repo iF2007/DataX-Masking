@@ -6,14 +6,16 @@ package ModuleTest;
 
 import com.alibaba.datax.transport.transformer.maskingMethods.differentialPrivacy.EpsilonDifferentialPrivacyImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.RSAEncryptionImpl;
-import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AESEncryptionImpl;
+import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AES;
 import com.alibaba.datax.transport.transformer.maskingMethods.irreversibleInterference.MD5EncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.FormatPreservingEncryptionImpl;
 import org.junit.Test;
 
+import java.util.Random;
+
 public class TestMasking {
 
-    private String originStr = "你好世界！";
+    private String originStr = "中文test";
     private double originDouble = 1.234;
 
     @Test
@@ -35,19 +37,22 @@ public class TestMasking {
         RSAEncryptionImpl masker = new RSAEncryptionImpl();
         for(int i=0;i<100;i++){
             try{
-                String content = new String("123");
+                String str="zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+                Random random = new Random();
+                StringBuffer random_str = new StringBuffer();
+                for(int j=0;j<6;j++) {
+                    char ch = str.charAt(random.nextInt(62));
+                    random_str.append(ch);
+                }
+                String content = new String("123小熊跳舞321 "+ random_str );
                 RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
                 int PaddingType = rsatest.PKCS1;
                 System.out.println("RSA加密解密\n数据加密前：" + content);
                 System.out.println("将原始数据转换为16进制表示的字串：" + rsatest.changeBytesToString(content.getBytes()));
-                String masked = rsatest.executeWithPrivateEncrypt(content, PaddingType);
-                System.out.println("私钥加密后：" + masked);
-                String decoded = rsatest.executeWithPublicDecrypt(masked, PaddingType);
-                System.out.println("解密后：" + decoded);
-                masked = rsatest.executeWithPublicEncrypt(content, PaddingType);
+                String masked = rsatest.publicEncrypt(rsatest.getPublicKey(), content);
                 System.out.println("公钥加密后：" + masked);
-                decoded = rsatest.executeWithPrivateDecrypt(masked, PaddingType);
-                System.out.println("私钥解密后：" + decoded);
+                String decoded = rsatest.privateDecrypt(rsatest.getPrivateKey(), masked);
+                System.out.println("解密后：" + decoded);
             }
             catch (Exception e){
                 System.out.println(e);
@@ -57,10 +62,14 @@ public class TestMasking {
 
     @Test
     public void testAES(){
-        AESEncryptionImpl masker = new AESEncryptionImpl();
         try{
-            String result = masker.execute(originStr);
+            String encodeRule = "666";
+            AES encoder = AES.getInstance(encodeRule);
+            String result = encoder.encode(originStr);
             System.out.println(result);
+            AES.delInstance();
+            AES decoder = AES.getInstance("666");
+            System.out.println(decoder.decode(result));
         }
         catch (Exception e){
             System.out.println(e);
