@@ -55,7 +55,9 @@
 | 可逆 |||||||DEBUG||building|
 |UTF-8编码下多语言支持||building|
 
+
 注：RSA和AES对接数据库时，请确保加密字段支持UTF-8编码！！
+
 
 ## Masking Transformer 配置编写介绍
 * columnIndex：columnIndex
