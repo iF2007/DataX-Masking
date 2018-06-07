@@ -151,10 +151,9 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 			int key_len=pk.getModulus().bitLength()/8;
 			byte[] bytes=data.getBytes();
 			byte[] bcd=ASCII_To_BCD(bytes,bytes.length);
-			System.err.println(bcd.length);
 			//如果密文长度大于模长则要分组解密
 			String result="";
-			byte[][] arrays=splitArray(bcd,key_len);
+			byte[][] arrays = splitArray(bcd, key_len);
 			for(byte[] arr:arrays){
 				result+=new String(cipher.doFinal(arr));
 			}

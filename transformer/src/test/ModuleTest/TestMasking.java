@@ -53,10 +53,6 @@ public class TestMasking {
                 System.out.println("公钥加密后：" + masked);
                 String decoded = rsatest.privateDecrypt(rsatest.getPrivateKey(), masked);
                 System.out.println("解密后：" + decoded);
-                masked = rsatest.privateEncrypt(rsatest.getPrivateKey(), content);
-                System.out.println("私钥加密后：" + masked);
-                decoded = rsatest.publicDecrypt(rsatest.getPublicKey(), masked);
-                System.out.println("解密后：" + decoded);
             }
             catch (Exception e){
                 System.out.println(e);
@@ -66,13 +62,14 @@ public class TestMasking {
 
     @Test
     public void testAES(){
-
         try{
             String encodeRule = "666";
-            AES masker = AES.getInstance(encodeRule);
-            String result = masker.encode(originStr);
+            AES encoder = AES.getInstance(encodeRule);
+            String result = encoder.encode(originStr);
             System.out.println(result);
-            System.out.println(masker.decode(result));
+            AES.delInstance();
+            AES decoder = AES.getInstance("666");
+            System.out.println(decoder.decode(result));
         }
         catch (Exception e){
             System.out.println(e);

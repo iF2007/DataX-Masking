@@ -55,7 +55,7 @@
 | 可逆 |||||||DEBUG||building|
 |UTF-8编码下多语言支持||building|
 
-注：当前版本RSA解密尚不稳定。
+注：RSA和AES对接数据库时，请确保加密字段支持UTF-8编码！！
 
 ## Masking Transformer 配置编写介绍
 * columnIndex：columnIndex
@@ -205,7 +205,7 @@ paras:有效参数1个，第二个参数置空
 6.3 RSA加密/解密
 目前支持公钥加密和私钥解密两种方法
 
-paras 第二个参数：~~*private_encrypt* 私钥加密；*public_decrypt* 公钥解密~~*private_decrypt* 私钥解密；*public_encrypt* 公钥加密；
+paras 第二个参数：*private_decrypt* 私钥解密；*public_encrypt* 公钥加密；
 
 ```
 RSA私钥解密
@@ -351,8 +351,6 @@ Transformer配置示例：
 ### RSA加密解密操作补充说明
 
 公钥加密后配合私钥解密可以实现针对特定对象的加密传输，可以用来交易数据。
-
-私钥加密后配合公钥解密可以实现签名功能，用以验证数据来源。
 
 **为了保证加密解密过程的有效性，这里在加密过程中取消了padding方法，这使得对于需要加密的明文，其对应的bite位长度应小于秘钥长度(1024）位，**
 点此查看[原因](http://arganzheng.life/input-too-large-for-RSA-cipher.html)。

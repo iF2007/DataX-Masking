@@ -46,6 +46,10 @@ public class AES {
         return single;
     }
 
+    public static void delInstance(){
+        single = null;
+    }
+
     public static SecretKey produceKey(String encodeRules){
         try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
@@ -78,9 +82,6 @@ public class AES {
             //9.根据密码器的初始化方式--加密：将数据加密
             byte [] byte_AES = cipher.doFinal(byte_encode);
             //10.将加密后的数据转换为字符串
-            //这里用Base64Encoder中会找不到包
-            //解决办法：
-            //在项目的Build path中先移除JRE System Library，再添加库JRE System Library，重新编译后就一切正常了。
             String AES_encode = new String(new BASE64Encoder().encode(byte_AES));
             //11.将字符串返回
             return AES_encode;
@@ -138,19 +139,19 @@ public class AES {
         //如果有错就返加nulll
         return null;
     }
-//    public static void main(String[] args) {
-//        AES se = AES.getInstance("10086");
-//        String content = "Life is like a box of chocolates, 生活就像一盒巧克力 QAQ";
-//        /*
-//         * 加密
-//         */
-//        String encodeRules = "10086";
-//        String masked = se.encode(content);
-//        System.out.println("根据输入的规则"+encodeRules+"加密后的密文是:"+masked);
-//
-//        /*
-//         * 解密
-//         */
-//        System.out.println("根据输入的规则"+encodeRules+"解密后的明文是:"+se.decode(masked));
-//    }
+    public static void main(String[] args) {
+        AES se = AES.getInstance("10086");
+        String content = "Life is like a box of chocolates, 生活就像一盒巧克力 QAQ";
+        /*
+         * 加密
+         */
+        String encodeRules = "10086";
+        String masked = se.encode(content);
+        System.out.println("根据输入的规则"+encodeRules+"加密后的密文是:"+masked);
+
+        /*
+         * 解密
+         */
+        System.out.println("根据输入的规则"+encodeRules+"解密后的明文是:"+se.decode(masked));
+    }
 }
