@@ -33,6 +33,7 @@
 ## 2.2 数据走势
 随着数据规模的增大，作业耗费时间基本随之线性增长。提升channel数虽然能提高效率，但channel数量和性能提高程度并不是线性关系——提高并发要结合实际情况。
 
+### 2.2.1 不同channel个数下数据规模对作业时间的影响
 channel 1
 ![channel 1](img/channel1.PNG)
 
@@ -42,8 +43,22 @@ channel 5
 channel 10
 ![channel 10](img/channel10.PNG)
 
+### 2.2.2 channel数对作业时间的影响
 处理10亿规模数据，改变channel对脱敏作业时间耗费的影响
 ![channels](img/channels.PNG)
+
+改变channel对transformer平均作业时间的影响
+![transformer](img/transformer-channel.PNG)
+
+改变channel对reader平均作业时间的影响
+![reader](img/reader-channel.PNG)
+
+改变channel对writer平均作业时间的影响
+![writer](img/writer-channel.PNG)
+
+### 2.2.3 各部分时间占比
+channel=10； 10亿条数据
+![ratio](img/ratio.PNG)
 
 ## 2.3 结果数据
 <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:
@@ -185,7 +200,7 @@ channel 10
 <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:
  0cm 5.4pt 0cm 5.4pt">
  <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:14.25pt">
-  <td width="26%" nowrap="" rowspan="2" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" rowspan="2" style="width:30.26%;border:solid windowtext 1.0pt;
   mso-border-top-alt:1.0pt;mso-border-left-alt:1.0pt;mso-border-bottom-alt:
   .5pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
   solid;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -193,7 +208,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">　<span lang="EN-US"><o:p></o:p></span></span></p>
   </td>
-  <td width="73%" colspan="7" style="width:73.26%;border-top:solid windowtext 1.0pt;
+  <td width="69%" colspan="7" style="width:69.74%;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid black 1.0pt;background:#70AD47;padding:0cm 5.4pt 0cm 5.4pt;
@@ -204,7 +219,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:1;height:14.25pt">
-  <td width="73%" colspan="7" style="width:73.26%;border-top:none;border-left:
+  <td width="69%" colspan="7" style="width:69.74%;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid black 1.0pt;
@@ -215,7 +230,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:2;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -223,7 +238,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">数据量（条）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -231,7 +246,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -239,7 +254,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10000<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -247,7 +262,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -255,7 +270,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1M<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -263,7 +278,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10M<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -271,7 +286,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100M<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -281,7 +296,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:3;height:14.25pt">
-  <td width="26%" nowrap="" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" style="width:30.26%;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -289,7 +304,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">总时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -297,7 +312,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -305,7 +320,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -313,7 +328,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -321,7 +336,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -329,25 +344,25 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">20<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">70<o:p></o:p></span></p>
+  0pt">120<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">670<o:p></o:p></span></p>
+  0pt">1220<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:4;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -357,65 +372,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">脱敏时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.056<o:p></o:p></span></p>
+  0pt">0.031<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.319<o:p></o:p></span></p>
+  0pt">0.057<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">4.252<o:p></o:p></span></p>
+  0pt">0.142<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.837<o:p></o:p></span></p>
+  0pt">0.531<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">13.503<o:p></o:p></span></p>
+  0pt">4.411<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">81.333<o:p></o:p></span></p>
+  0pt">41.367<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">774.464<o:p></o:p></span></p>
+  0pt">428.472<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:5;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -425,65 +440,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.836<o:p></o:p></span></p>
+  0pt">0.127<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.202<o:p></o:p></span></p>
+  0pt">0.177<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">10.288<o:p></o:p></span></p>
+  0pt">0.401<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">8.969<o:p></o:p></span></p>
+  0pt">1.582<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">55.359<o:p></o:p></span></p>
+  0pt">12.494<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">324.091<o:p></o:p></span></p>
+  0pt">115.128<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">2653.187<o:p></o:p></span></p>
+  0pt">1175.635<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:6;height:15.0pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext 1.0pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt">
@@ -493,7 +508,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
@@ -501,74 +516,74 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">0.003<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.023<o:p></o:p></span></p>
+  0pt">0.005<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.091<o:p></o:p></span></p>
+  0pt">0.015<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.113<o:p></o:p></span></p>
+  0pt">0.047<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">2.825<o:p></o:p></span></p>
+  0pt">0.401<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">8.402<o:p></o:p></span></p>
+  0pt">3.957<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">170.401<o:p></o:p></span></p>
+  0pt">39.389<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:7;height:15.0pt">
-  <td width="26%" nowrap="" valign="bottom" style="width:26.74%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="30%" nowrap="" valign="bottom" style="width:30.26%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="8%" nowrap="" valign="bottom" style="width:8.18%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.2%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.94%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="10%" nowrap="" valign="bottom" style="width:10.94%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="10%" nowrap="" valign="bottom" style="width:10.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="9%" nowrap="" valign="bottom" style="width:9.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="11%" nowrap="" valign="bottom" style="width:11.66%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="11%" nowrap="" valign="bottom" style="width:11.36%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="13%" nowrap="" valign="bottom" style="width:13.06%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
  </tr>
  <tr style="mso-yfti-irow:8;height:14.25pt">
-  <td width="26%" nowrap="" rowspan="2" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" rowspan="2" style="width:30.26%;border:solid windowtext 1.0pt;
   mso-border-top-alt:1.0pt;mso-border-left-alt:1.0pt;mso-border-bottom-alt:
   .5pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
   solid;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -576,7 +591,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">　<span lang="EN-US"><o:p></o:p></span></span></p>
   </td>
-  <td width="73%" colspan="7" style="width:73.26%;border-top:solid windowtext 1.0pt;
+  <td width="69%" colspan="7" style="width:69.74%;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid black 1.0pt;background:#70AD47;padding:0cm 5.4pt 0cm 5.4pt;
@@ -587,7 +602,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:9;height:14.25pt">
-  <td width="73%" colspan="7" style="width:73.26%;border-top:none;border-left:
+  <td width="69%" colspan="7" style="width:69.74%;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid black 1.0pt;
@@ -598,7 +613,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:10;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -606,7 +621,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">数据量（条）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -614,7 +629,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -622,7 +637,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10000<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -630,7 +645,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -638,7 +653,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1M<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -646,7 +661,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10M<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -654,7 +669,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100M<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -664,7 +679,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:11;height:14.25pt">
-  <td width="26%" nowrap="" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" style="width:30.26%;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -672,7 +687,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">总时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -680,7 +695,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -688,7 +703,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -696,7 +711,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -704,7 +719,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -712,25 +727,25 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">60<o:p></o:p></span></p>
+  0pt">100<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">580<o:p></o:p></span></p>
+  0pt">990<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:12;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -740,65 +755,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">脱敏时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.04<o:p></o:p></span></p>
+  0pt">0.011<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.23<o:p></o:p></span></p>
+  0pt">0.032<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.408<o:p></o:p></span></p>
+  0pt">0.072<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.812<o:p></o:p></span></p>
+  0pt">0.248<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">4.405<o:p></o:p></span></p>
+  0pt">1.811<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">36.639<o:p></o:p></span></p>
+  0pt">17.621<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">310.808<o:p></o:p></span></p>
+  0pt">179.94<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:13;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -808,65 +823,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.329<o:p></o:p></span></p>
+  0pt">0.066<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.755<o:p></o:p></span></p>
+  0pt">0.147<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.761<o:p></o:p></span></p>
+  0pt">0.286<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">6.775<o:p></o:p></span></p>
+  0pt">1.345<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">34.49<o:p></o:p></span></p>
+  0pt">9.342<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">289.341<o:p></o:p></span></p>
+  0pt">87.753<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1596.446<o:p></o:p></span></p>
+  0pt">947.212<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:14;height:15.0pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext 1.0pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt">
@@ -876,82 +891,82 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.004<o:p></o:p></span></p>
+  0pt">0.002<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.019<o:p></o:p></span></p>
+  0pt">0.006<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.036<o:p></o:p></span></p>
+  0pt">0.013<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.107<o:p></o:p></span></p>
+  0pt">0.047<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.915<o:p></o:p></span></p>
+  0pt">0.388<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">7.932<o:p></o:p></span></p>
+  0pt">3.969<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">57.915<o:p></o:p></span></p>
+  0pt">51.176<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:15;height:15.0pt">
-  <td width="26%" nowrap="" valign="bottom" style="width:26.74%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="30%" nowrap="" valign="bottom" style="width:30.26%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="8%" nowrap="" valign="bottom" style="width:8.18%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.2%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.94%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="10%" nowrap="" valign="bottom" style="width:10.94%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="10%" nowrap="" valign="bottom" style="width:10.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="9%" nowrap="" valign="bottom" style="width:9.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="11%" nowrap="" valign="bottom" style="width:11.66%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="11%" nowrap="" valign="bottom" style="width:11.36%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="13%" nowrap="" valign="bottom" style="width:13.06%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
  </tr>
  <tr style="mso-yfti-irow:16;height:14.25pt">
-  <td width="26%" nowrap="" rowspan="2" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" rowspan="2" style="width:30.26%;border:solid windowtext 1.0pt;
   mso-border-top-alt:1.0pt;mso-border-left-alt:1.0pt;mso-border-bottom-alt:
   .5pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
   solid;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -959,7 +974,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">　<span lang="EN-US"><o:p></o:p></span></span></p>
   </td>
-  <td width="73%" colspan="7" style="width:73.26%;border-top:solid windowtext 1.0pt;
+  <td width="69%" colspan="7" style="width:69.74%;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid black 1.0pt;background:#70AD47;padding:0cm 5.4pt 0cm 5.4pt;
@@ -970,7 +985,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:17;height:14.25pt">
-  <td width="73%" colspan="7" style="width:73.26%;border-top:none;border-left:
+  <td width="69%" colspan="7" style="width:69.74%;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid black 1.0pt;
@@ -981,7 +996,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:18;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -989,7 +1004,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">数据量（条）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -997,7 +1012,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1005,7 +1020,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10000<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1013,7 +1028,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1021,7 +1036,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1M<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1029,7 +1044,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10M<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1037,7 +1052,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100M<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1047,7 +1062,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:19;height:14.25pt">
-  <td width="26%" nowrap="" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" style="width:30.26%;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1055,7 +1070,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">总时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1063,7 +1078,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1071,7 +1086,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1079,7 +1094,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1087,7 +1102,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1095,25 +1110,25 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">40<o:p></o:p></span></p>
+  0pt">80<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">420<o:p></o:p></span></p>
+  0pt">980<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:20;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1123,65 +1138,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">脱敏时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.01<o:p></o:p></span></p>
+  0pt">0.004<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.043<o:p></o:p></span></p>
+  0pt">0.009<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.138<o:p></o:p></span></p>
+  0pt">0.018<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.265<o:p></o:p></span></p>
+  0pt">0.055<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.325<o:p></o:p></span></p>
+  0pt">0.414<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">11.985<o:p></o:p></span></p>
+  0pt">3.959<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">86.237<o:p></o:p></span></p>
+  0pt">46.159<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:21;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1191,65 +1206,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.621<o:p></o:p></span></p>
+  0pt">0.079<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.457<o:p></o:p></span></p>
+  0pt">0.109<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">2.125<o:p></o:p></span></p>
+  0pt">0.261<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">7.783<o:p></o:p></span></p>
+  0pt">1.079<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">18.264<o:p></o:p></span></p>
+  0pt">7.918<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">153.692<o:p></o:p></span></p>
+  0pt">73.018<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1818.202<o:p></o:p></span></p>
+  0pt">942.559<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:22;height:15.0pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext 1.0pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt">
@@ -1259,82 +1274,82 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.012<o:p></o:p></span></p>
+  0pt">0.003<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.017<o:p></o:p></span></p>
+  0pt">0.006<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.056<o:p></o:p></span></p>
+  0pt">0.013<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.292<o:p></o:p></span></p>
+  0pt">0.051<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.689<o:p></o:p></span></p>
+  0pt">0.418<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">6.737<o:p></o:p></span></p>
+  0pt">4.072<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">49.119<o:p></o:p></span></p>
+  0pt">102.835<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:23;height:15.0pt">
-  <td width="26%" nowrap="" valign="bottom" style="width:26.74%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="30%" nowrap="" valign="bottom" style="width:30.26%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="8%" nowrap="" valign="bottom" style="width:8.18%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.2%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.94%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="10%" nowrap="" valign="bottom" style="width:10.94%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="10%" nowrap="" valign="bottom" style="width:10.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="9%" nowrap="" valign="bottom" style="width:9.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="11%" nowrap="" valign="bottom" style="width:11.66%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="11%" nowrap="" valign="bottom" style="width:11.36%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="13%" nowrap="" valign="bottom" style="width:13.06%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
  </tr>
  <tr style="mso-yfti-irow:24;height:14.25pt">
-  <td width="26%" nowrap="" rowspan="2" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" rowspan="2" style="width:30.26%;border:solid windowtext 1.0pt;
   mso-border-top-alt:1.0pt;mso-border-left-alt:1.0pt;mso-border-bottom-alt:
   .5pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
   solid;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1342,7 +1357,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">　<span lang="EN-US"><o:p></o:p></span></span></p>
   </td>
-  <td width="73%" colspan="7" style="width:73.26%;border-top:solid windowtext 1.0pt;
+  <td width="69%" colspan="7" style="width:69.74%;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid black 1.0pt;background:#70AD47;padding:0cm 5.4pt 0cm 5.4pt;
@@ -1353,7 +1368,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:25;height:14.25pt">
-  <td width="73%" colspan="7" style="width:73.26%;border-top:none;border-left:
+  <td width="69%" colspan="7" style="width:69.74%;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid black 1.0pt;
@@ -1364,7 +1379,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:26;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1372,7 +1387,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">数据量（条）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1380,7 +1395,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1388,7 +1403,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10000<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1396,7 +1411,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1404,7 +1419,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1M<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1412,7 +1427,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10M<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1420,7 +1435,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100M<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1430,7 +1445,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:27;height:14.25pt">
-  <td width="26%" nowrap="" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" style="width:30.26%;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1438,7 +1453,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">总时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1446,7 +1461,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1454,7 +1469,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1462,7 +1477,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1470,33 +1485,33 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">10<o:p></o:p></span></p>
+  0pt">20<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">60<o:p></o:p></span></p>
+  0pt">110<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">490<o:p></o:p></span></p>
+  0pt">1220<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:28;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1506,65 +1521,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">脱敏时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.133<o:p></o:p></span></p>
+  0pt">0.016<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.205<o:p></o:p></span></p>
+  0pt">0.047<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.416<o:p></o:p></span></p>
+  0pt">0.094<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.294<o:p></o:p></span></p>
+  0pt">0.411<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">7.666<o:p></o:p></span></p>
+  0pt">3.092<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">73.972<o:p></o:p></span></p>
+  0pt">30.53<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">661.793<o:p></o:p></span></p>
+  0pt">358.788<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:29;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1574,65 +1589,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.641<o:p></o:p></span></p>
+  0pt">0.009<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.818<o:p></o:p></span></p>
+  0pt">0.17<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.985<o:p></o:p></span></p>
+  0pt">0.344<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">8.544<o:p></o:p></span></p>
+  0pt">1.496<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">32.279<o:p></o:p></span></p>
+  0pt">10.969<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">274.771<o:p></o:p></span></p>
+  0pt">105.513<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1831.984<o:p></o:p></span></p>
+  0pt">1175.037<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:30;height:15.0pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext 1.0pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt">
@@ -1642,82 +1657,82 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.003<o:p></o:p></span></p>
+  0pt">0.088<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.025<o:p></o:p></span></p>
+  0pt">0.006<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.066<o:p></o:p></span></p>
+  0pt">0.012<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.146<o:p></o:p></span></p>
+  0pt">0.061<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.946<o:p></o:p></span></p>
+  0pt">0.424<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">16.866<o:p></o:p></span></p>
+  0pt">4.108<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">50.805<o:p></o:p></span></p>
+  0pt">69.419<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:31;height:15.0pt">
-  <td width="26%" nowrap="" valign="bottom" style="width:26.74%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="30%" nowrap="" valign="bottom" style="width:30.26%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="8%" nowrap="" valign="bottom" style="width:8.18%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.2%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.94%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="10%" nowrap="" valign="bottom" style="width:10.94%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="10%" nowrap="" valign="bottom" style="width:10.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="8%" nowrap="" valign="bottom" style="width:8.04%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="9%" nowrap="" valign="bottom" style="width:9.92%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="9%" nowrap="" valign="bottom" style="width:9.66%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="11%" nowrap="" valign="bottom" style="width:11.66%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="11%" nowrap="" valign="bottom" style="width:11.36%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;padding:0cm 5.4pt 0cm 5.4pt;
+  <td width="13%" nowrap="" valign="bottom" style="width:13.06%;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt"></td>
  </tr>
  <tr style="mso-yfti-irow:32;height:14.25pt">
-  <td width="26%" nowrap="" rowspan="2" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" rowspan="2" style="width:30.26%;border:solid windowtext 1.0pt;
   mso-border-top-alt:1.0pt;mso-border-left-alt:1.0pt;mso-border-bottom-alt:
   .5pt;mso-border-right-alt:.5pt;mso-border-color-alt:windowtext;mso-border-style-alt:
   solid;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1725,7 +1740,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">　<span lang="EN-US"><o:p></o:p></span></span></p>
   </td>
-  <td width="73%" colspan="7" style="width:73.26%;border-top:solid windowtext 1.0pt;
+  <td width="69%" colspan="7" style="width:69.74%;border-top:solid windowtext 1.0pt;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid black 1.0pt;background:#70AD47;padding:0cm 5.4pt 0cm 5.4pt;
@@ -1736,7 +1751,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:33;height:14.25pt">
-  <td width="73%" colspan="7" style="width:73.26%;border-top:none;border-left:
+  <td width="69%" colspan="7" style="width:69.74%;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid black 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid black 1.0pt;
@@ -1749,7 +1764,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:34;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1757,7 +1772,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">数据量（条）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1765,7 +1780,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1773,7 +1788,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10000<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1781,7 +1796,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100000<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1789,7 +1804,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">1M<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1797,7 +1812,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10M<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1805,7 +1820,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">100M<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" style="width:13.42%;border-top:none;border-left:none;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1815,7 +1830,7 @@ channel 10
   </td>
  </tr>
  <tr style="mso-yfti-irow:35;height:14.25pt">
-  <td width="26%" nowrap="" style="width:26.74%;border:solid windowtext 1.0pt;
+  <td width="30%" nowrap="" style="width:30.26%;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1823,7 +1838,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">总时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1831,7 +1846,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1839,7 +1854,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1847,7 +1862,7 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
@@ -1855,33 +1870,33 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">10<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">20<o:p></o:p></span></p>
+  0pt">30<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">150<o:p></o:p></span></p>
+  0pt">240<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
-  <p class="MsoNormal" align="right" style="text-align:right;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
+  <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">880<o:p></o:p></span></p>
+  0pt">2330<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:36;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1891,65 +1906,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">脱敏时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.43<o:p></o:p></span></p>
+  0pt">0.056<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.934<o:p></o:p></span></p>
+  0pt">0.154<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.547<o:p></o:p></span></p>
+  0pt">0.327<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">5.625<o:p></o:p></span></p>
+  0pt">1.769<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">42.514<o:p></o:p></span></p>
+  0pt">16.428<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">392.165<o:p></o:p></span></p>
+  0pt">161.009<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
-  <p class="MsoNormal" align="right" style="text-align:right;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
+  <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">2136.568<o:p></o:p></span></p>
+  0pt">1475.302<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:37;height:14.25pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:14.25pt">
@@ -1959,65 +1974,65 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">1.536<o:p></o:p></span></p>
+  0pt">0.123<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">2.176<o:p></o:p></span></p>
+  0pt">0.276<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">4.485<o:p></o:p></span></p>
+  0pt">0.551<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">13.973<o:p></o:p></span></p>
+  0pt">2.708<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">80.309<o:p></o:p></span></p>
+  0pt">24.165<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">711.103<o:p></o:p></span></p>
+  0pt">235.345<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt">
-  <p class="MsoNormal" align="right" style="text-align:right;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
+  <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">4014.058<o:p></o:p></span></p>
+  0pt">2274.027<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:38;mso-yfti-lastrow:yes;height:15.0pt">
-  <td width="26%" style="width:26.74%;border:solid windowtext 1.0pt;border-top:
+  <td width="30%" style="width:30.26%;border:solid windowtext 1.0pt;border-top:
   none;mso-border-left-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext 1.0pt;
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:15.0pt">
@@ -2027,60 +2042,60 @@ channel 10
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
   0pt">等待时间（<span lang="EN-US">s</span>）<span lang="EN-US"><o:p></o:p></span></span></b></p>
   </td>
-  <td width="8%" nowrap="" style="width:8.18%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.003<o:p></o:p></span></p>
+  0pt">0.002<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.2%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.94%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.042<o:p></o:p></span></p>
+  0pt">0.006<o:p></o:p></span></p>
   </td>
-  <td width="10%" nowrap="" style="width:10.94%;border-top:none;border-left:none;
+  <td width="10%" nowrap="" style="width:10.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.047<o:p></o:p></span></p>
+  0pt">0.01<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="8%" nowrap="" style="width:8.04%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">0.292<o:p></o:p></span></p>
+  0pt">0.046<o:p></o:p></span></p>
   </td>
-  <td width="9%" nowrap="" style="width:9.92%;border-top:none;border-left:none;
+  <td width="9%" nowrap="" style="width:9.66%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">4.837<o:p></o:p></span></p>
+  0pt">0.385<o:p></o:p></span></p>
   </td>
-  <td width="11%" nowrap="" style="width:11.66%;border-top:none;border-left:none;
+  <td width="11%" nowrap="" style="width:11.36%;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-bottom-alt:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
   <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">71.013<o:p></o:p></span></p>
+  0pt">3.71<o:p></o:p></span></p>
   </td>
-  <td width="13%" nowrap="" valign="bottom" style="width:13.42%;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  <td width="13%" nowrap="" style="width:13.06%;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt">
-  <p class="MsoNormal" align="right" style="text-align:right;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
+  <p class="MsoNormal" align="center" style="text-align:center;mso-pagination:widow-orphan"><span lang="EN-US" style="font-size:11.0pt;mso-ascii-font-family:等线;mso-fareast-font-family:
   等线;mso-hansi-font-family:等线;mso-bidi-font-family:宋体;color:black;mso-font-kerning:
-  0pt">80.022<o:p></o:p></span></p>
+  0pt">39.424<o:p></o:p></span></p>
   </td>
  </tr>
 </tbody></table>
