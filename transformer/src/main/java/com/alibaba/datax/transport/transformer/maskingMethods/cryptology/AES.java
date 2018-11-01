@@ -35,19 +35,10 @@ public class AES {
      * 5.内容加密
      * 6.返回字符串
      */
-    private static AES single = null;
-    private static SecretKey KEY = null;
-    //静态工厂方法
-    public static AES getInstance(String encodeRule) {
-        if (single == null) {
-            single = new AES();
-            KEY = produceKey(encodeRule);
-        }
-        return single;
-    }
+    private SecretKey KEY = null;
 
-    public static void delInstance(){
-        single = null;
+    public AES(String encodeRule){
+        KEY = produceKey(encodeRule);
     }
 
     public static SecretKey produceKey(String encodeRules){
@@ -140,7 +131,7 @@ public class AES {
         return null;
     }
     public static void main(String[] args) {
-        AES se = AES.getInstance("10086");
+        AES se = new AES("10086");
         String content = "Life is like a box of chocolates, 生活就像一盒巧克力 QAQ";
         /*
          * 加密

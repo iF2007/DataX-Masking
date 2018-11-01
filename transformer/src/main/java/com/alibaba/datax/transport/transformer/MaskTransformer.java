@@ -44,13 +44,13 @@ public class MaskTransformer extends  Transformer{
             }
             if(maskMethodId.equals("AES_E")){
                 String newValue;
-                AES masker = AES.getInstance(key);
+                AES masker = new AES(key);
                 newValue = masker.encode(oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }
             else if(maskMethodId.equals("AES_D")){
                 String newValue;
-                AES masker = AES.getInstance(key);
+                AES masker = new AES(key);
                 newValue = masker.decode(oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }

@@ -64,11 +64,11 @@ public class TestMasking {
     public void testAES(){
         try{
             String encodeRule = "666";
-            AES encoder = AES.getInstance(encodeRule);
+            AES encoder = new AES(encodeRule);
+            AES eb = new AES(encodeRule);
             String result = encoder.encode(originStr);
             System.out.println(result);
-            AES.delInstance();
-            AES decoder = AES.getInstance("666");
+            AES decoder = new AES("666");
             System.out.println(decoder.decode(result));
         }
         catch (Exception e){
