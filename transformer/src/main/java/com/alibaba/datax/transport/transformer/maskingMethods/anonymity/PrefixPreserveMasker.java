@@ -8,31 +8,55 @@
 
 package com.alibaba.datax.transport.transformer.maskingMethods.anonymity;
 
-import java.util.ArrayList;
-
 import static java.lang.Math.min;
+import java.util.Random;
 
 /**
  * Created by LabUser on 2018/5/8.
  */
 public class PrefixPreserveMasker {
-
     public static char charMap(char origin){
+        Random ran1 = new Random((int) origin);
         if(Character.isDigit(origin)){
-            origin = (char) ('0' + (int)(Math.random()*10));
+            int randIntResult = ran1.nextInt(10);
+            origin = (char) ('0' + randIntResult);
+            ran1.setSeed(randIntResult);
         }
         else if(Character.isLetter(origin)){
-            int offset = (int)(Math.random()*26);
+            int randIntResult = ran1.nextInt(26);
+            int offset = 1 + ran1.nextInt(26);
             origin = origin<=90? (char)('A' + offset):(char)('a' + offset);
+            ran1.setSeed(randIntResult);
         }
         return origin;
     }
 
+    public static String randomInt(int numberLength){
+        Random ran1 = new Random(numberLength);
+        double basic = Math.pow(10, numberLength-1);
+        int base = (int) basic;
+        int result = base + ran1.nextInt(base*9 - 1);
+        return Integer.toString(result);
+    }
+
+    /*
+    * mask long integer.
+    * */
     public static long mask(long origin, int preserveNum) throws Exception{
+        long temp = origin;
+        // when origin number is smaller than zero.
+        if(temp < 0){
+            origin = 0 - origin;
+        }
         String ori_str = String.valueOf(origin);
         char[] result = new char[ori_str.length()];
+        String randomSuffix = randomInt(ori_str.length() - preserveNum);
         for(int i=0;i<ori_str.length();i++){
-            result[i] = i<preserveNum ? ori_str.charAt(i):charMap(ori_str.charAt(i));
+            // result[i] = i<preserveNum ? ori_str.charAt(i):charMap(ori_str.charAt(i));
+            result[i] = i < preserveNum ? ori_str.charAt(i):randomSuffix.charAt(i-preserveNum);
+        }
+        if (temp < 0){
+            return 0 - Long.valueOf(String.valueOf(result));
         }
         return Long.valueOf(String.valueOf(result));
     }
